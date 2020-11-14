@@ -5,6 +5,11 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 
+const usersRouter = require('./users/users_router')
+const cash_sessions_Router = require('./cash_sessions/cash_sessions_router')
+
+
+
 const app = express();
 
 const morganOption = (NODE_ENV === 'production')
@@ -15,8 +20,9 @@ app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
 
-
-
+// Endpoints moved to routers
+app.use('/api/users', usersRouter)
+app.use('api/cash_sessions', cash_sessions_Router)
 
 app.get('/', (req, res) => {
     res.send('Hello, boilerplate!');

@@ -1,3 +1,4 @@
+TRUNCATE users RESTART IDENTITY cascade;
 INSERT INTO users (user_id, user_username, user_password, user_email)
 VALUES
     (1, 'pokerbuddy', 'supersecurepassword', 'pokerkid1@gmail.com'),
@@ -7,6 +8,7 @@ VALUES
     (5, 'BobTheBonehead', 'igiveallmymoneyaway', 'loser4lyfe@gmail.com'),
     (6, 'LarryTheLawyer', 'Imagoodlawyer', 'lawschoolguy@gmail.com');
 
+SELECT setval('users_user_id_seq', 6, true);
 
 
     

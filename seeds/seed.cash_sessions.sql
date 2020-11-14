@@ -1,3 +1,5 @@
+TRUNCATE cash_sessions RESTART IDENTITY cascade;
+
 INSERT INTO cash_sessions (cash_session_id, cash_session_buyin, cash_session_cashout,
  cash_session_hours_played, cash_session_date, user_id)
 VALUES
@@ -15,3 +17,5 @@ VALUES
     (12, 300, 400, 5, now(), 4),
     (13, 100, 400, 10.5, now(), 5),
     (14, 60, 4000, 12, now(), 6);
+
+SELECT setval('cash_sessions_cash_session_id_seq', 14, true);
