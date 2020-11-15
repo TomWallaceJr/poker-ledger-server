@@ -56,6 +56,9 @@ cashSessionsRouter
             .catch(next)
     })
 
+// these routes are for when user is logged in and we have access to their user_id
+// GET all current user cash sessions
+// POST session??? We have Post already in '/' endpoint
 cashSessionsRouter
     .route('/:user_id')
     .all((req, res, next) => {
@@ -86,6 +89,10 @@ cashSessionsRouter
             .catch(next)
     })
 
+// *************** QUESTION ********************
+// another endpoint '/:user_id/:cash_session_id' ????
+// this endpoint would be used to delete and update specific cash sessions
+// or can we do this in '/:user_id' endpoint????
 
 
 module.exports = cashSessionsRouter
