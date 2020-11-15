@@ -2,6 +2,7 @@ const express = require('express')
 const xss = require('xss')
 const CashSessionsService = require('./cash_sessions_service')
 const path = require('path')
+const UsersService = require('../users/users_service')
 
 const cashSessionsRouter = express.Router()
 const jsonParser = express.json()
@@ -55,6 +56,35 @@ cashSessionsRouter
             .catch(next)
     })
 
+cashSessionsRouter
+    .route('/:user_id')
+    .all((req, res, next) => {
+        UsersService.getById(
+            req.app.get('db'),
+            req.params.user_id
+        )
+            .then(user => {
+                if (!user) {
+                    return res.status(404).json({
+                        error: { message: `User does not exist` }
+                    })
+                }
+                res.user = user
+                next()
+            })
+            .catch(next)
+    })
+    // queries cash_session table for all entries with current user_id FK and returns them
+    .get((req, res, next) => {
+        CashSessionsService.getCashSessionsByUserId(
+            req.app.get('db'),
+            req.params.user_id
+        )
+            .then(cash_sessions => {
+                res.json(cash_sessions.map(serializeCashSession))
+            })
+            .catch(next)
+    })
 
 
 
