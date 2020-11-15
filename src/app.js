@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 
 const usersRouter = require('./users/users_router')
-const cash_sessions_Router = require('./cash_sessions/cash_sessions_router')
+const cashSessionsRouter = require('./cash_sessions/cash_sessions_router')
 
 
 
@@ -22,7 +22,7 @@ app.use(cors());
 
 // Endpoints moved to routers
 app.use('/api/users', usersRouter)
-app.use('api/cash_sessions', cash_sessions_Router)
+app.use('api/cash_sessions', cashSessionsRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello, boilerplate!');
