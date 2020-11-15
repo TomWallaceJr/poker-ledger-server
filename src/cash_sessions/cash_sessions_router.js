@@ -26,4 +26,36 @@ cashSessionsRouter
             })
             .catch(next)
     })
+    .post(jsonParser, (req, res, next) => {
+        const { cash_session_buyin, cash_session_cashout, cash_session_hours_played, cash_session_date, user_id } = req.body
+        const newEntry = { cash_session_buyin, cash_session_cashout, cash_session_hours_played, cash_session_date, user_id }
+
+        for (const [key, value] of Object.entries(newEntry))
+            if (value == null)
+                return res.status(400).json({
+                    error: { message: `Missing '${key}' in request body` }
+                })
+
+        newEntry.cash_session_buyin = cash_session_buyin
+        newEntry.cash_session_cashout = cash_session_cashout
+        newEntry.cash_session_hours_played = cash_session_hours_played
+        newEntry.cash_session_date = cash_session_date
+        newEntry.user_id = user_id
+
+        CashSessionsService.insertCashSession(
+            req.app.get('db'),
+            newEntry
+        )
+            .then(entry => {
+                res
+                    .status(201)
+                    .location(path.posix.join(req.originalUrl, `/${entry.cash_session_id}`))
+                    .json(serializeCashSession(entry))
+            })
+            .catch(next)
+    })
+
+
+
+
 module.exports = cashSessionsRouter

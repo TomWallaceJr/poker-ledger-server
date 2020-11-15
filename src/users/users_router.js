@@ -29,25 +29,15 @@ usersRouter
     })
     .post(jsonParser, (req, res, next) => {
         const { user_username, user_password, repeatPassword, user_email } = req.body
-        const newUser = { user_username }
+        const newUser = { user_username, user_password, user_email }
 
         // if no username, password, or email entered return 400 and error message
         // Brute force for now .... DRY principles later using loop with key/value pairs
-        if (!user_username) {
-            return res.status(400).json({
-                error: { message: `Missing username!` }
-            })
-        }
-        if (!user_password) {
-            return res.status(400).json({
-                error: { message: `Missing password!` }
-            })
-        }
-        if (!user_email) {
-            return res.status(400).json({
-                error: { message: `Missing email!` }
-            })
-        }
+        for (const [key, value] of Object.entries(newUser))
+            if (value == null)
+                return res.status(400).json({
+                    error: { message: `Missing '${key}' in request body` }
+                })
 
         // checks if password and repeat password match
         if (user_password != repeatPassword) {
