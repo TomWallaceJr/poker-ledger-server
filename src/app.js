@@ -22,7 +22,7 @@ app.use(cors());
 
 // Endpoints moved to routers
 app.use('/api/users', usersRouter)
-app.use('api/cash_sessions', cashSessionsRouter)
+app.use('/api/cash_sessions', cashSessionsRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello, boilerplate!');
