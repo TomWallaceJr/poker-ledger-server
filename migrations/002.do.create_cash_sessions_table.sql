@@ -8,4 +8,3 @@ CREATE TABLE cash_sessions (
     CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
--- cash_session_user_id FOREIGN KEY REFERENCES users(user_id) ON DELETE CASCADE NOT NULL

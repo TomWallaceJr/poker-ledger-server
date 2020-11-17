@@ -60,7 +60,7 @@ cashSessionsRouter
 // GET all current user cash sessions
 // POST session??? We have Post already in '/' endpoint
 cashSessionsRouter
-    .route('/:user_id')
+    .route('/:user_id/')
     .all((req, res, next) => {
         UsersService.getById(
             req.app.get('db'),
@@ -94,5 +94,7 @@ cashSessionsRouter
 // this endpoint would be used to delete and update specific cash sessions
 // or can we do this in '/:user_id' endpoint????
 
+
+// individual route *
 
 module.exports = cashSessionsRouter

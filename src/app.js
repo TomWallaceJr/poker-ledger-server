@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
+const jwt = require('jsonwebtoken');
 
 const usersRouter = require('./users/users_router')
 const cashSessionsRouter = require('./cash_sessions/cash_sessions_router')
@@ -24,9 +25,9 @@ app.use(cors());
 app.use('/api/users', usersRouter)
 app.use('/api/cash_sessions', cashSessionsRouter)
 
-app.get('/', (req, res) => {
-    res.send('Hello, boilerplate!');
-});
+// app.get('/', (req, res) => {
+//     res.send('Hello, boilerplate!');
+// });
 
 // error handling middleware
 app.use(function errorHandler(error, req, res, next) {
