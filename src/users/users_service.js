@@ -38,9 +38,13 @@ const UsersService = {
 
     userLogin(knex, username, password) {
         return knex
-            .select('*')
+            .select('username', 'password')
             .from('users')
             .where('username', username)
+            .where('password', password)
+            .then(rows => {
+                return rows[0]
+            })
     }
 }
 

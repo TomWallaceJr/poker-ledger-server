@@ -1,16 +1,19 @@
+/***
+ * created new router for login functionailty because i couldn't get it 
+ * to work in users router
+ * 
+ */
+
 const express = require('express')
 const UsersService = require('./users_service')
 
 const loginRouter = express.Router()
 const jsonParser = express.json()
 
-
 loginRouter
     .route('/')
     .post(jsonParser, (req, res, next) => {
         const { username, password } = req.body
-
-
         UsersService.userLogin(
             req.app.get('db'),
             username,
