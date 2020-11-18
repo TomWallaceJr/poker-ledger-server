@@ -9,9 +9,9 @@ const jsonParser = express.json()
 // use xss to defend from malicious user input
 const serializeUser = user => ({
     user_id: user.user_id,
-    user_username: xss(user.user_username),
-    user_password: xss(user.user_password),
-    user_email: xss(user.user_email)
+    username: xss(user.username),
+    password: xss(user.password),
+    email: xss(user.email)
 })
 
 usersRouter
@@ -28,8 +28,8 @@ usersRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
-        const { user_username, user_password, repeatPassword, user_email } = req.body
-        const newUser = { user_username, user_password, user_email }
+        const { username, password, repeatPassword, email } = req.body
+        const newUser = { username, password, email }
 
         // if no username, password, or email entered return 400 and error message
         // Brute force for now .... DRY principles later using loop with key/value pairs
@@ -40,14 +40,14 @@ usersRouter
                 })
 
         // checks if password and repeat password match
-        if (user_password != repeatPassword) {
+        if (password != repeatPassword) {
             return res.status(400).json({
                 error: { message: `Passwords must match!` }
             })
         }
 
-        newUser.user_password = user_password;
-        newUser.user_email = user_email;
+        newUser.password = password;
+        newUser.email = email;
 
         // insert user into database through users-service
         UsersService.insertUser(
@@ -100,8 +100,8 @@ usersRouter
     })
     .patch(jsonParser, (req, res, next) => {
         // deconstructs object proeprties from request body and creates variable for updated info
-        const { user_username, user_password, user_email } = req.body
-        const userToUpdate = { user_username, user_password, user_email }
+        const { username, password, email } = req.body
+        const userToUpdate = { username, password, email }
 
         // checks to see if name of any of key value pairs are username password or email
         const numberOfValues = Object.values(userToUpdate).filter(Boolean).length

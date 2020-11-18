@@ -1,7 +1,7 @@
 TRUNCATE cash_sessions RESTART IDENTITY cascade;
 
-INSERT INTO cash_sessions (cash_session_id, cash_session_buyin, cash_session_cashout,
- cash_session_hours_played, cash_session_date, user_id)
+INSERT INTO cash_sessions (cash_session_id, buyin, cashout,
+ hours_played, date, user_id)
 VALUES
     (1, 300, 400, 5, now(), 1),
     (2, 500, 0, 6.25, now(), 3),

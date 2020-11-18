@@ -10,10 +10,10 @@ const jsonParser = express.json()
 
 const serializeCashSession = cash_session => ({
     cash_session_id: cash_session.cash_session_id,
-    cash_session_buyin: xss(cash_session.cash_session_buyin),
-    cash_session_cashout: xss(cash_session.cash_session_cashout),
-    cash_session_hours_played: xss(cash_session.cash_session_hours_played),
-    cash_session_date: cash_session.cash_session_date,
+    buyin: xss(cash_session.buyin),
+    cashout: xss(cash_session.cashout),
+    hours_played: xss(cash_session.hours_played),
+    date: cash_session.date,
     user_id: cash_session.user_id
 })
 
@@ -28,8 +28,8 @@ cashSessionsRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
-        const { cash_session_buyin, cash_session_cashout, cash_session_hours_played, cash_session_date, user_id } = req.body
-        const newEntry = { cash_session_buyin, cash_session_cashout, cash_session_hours_played, cash_session_date, user_id }
+        const { buyin, cashout, hours_played, date, user_id } = req.body
+        const newEntry = { buyin, cashout, hours_played, date, user_id }
 
         for (const [key, value] of Object.entries(newEntry))
             if (value == null)
@@ -37,10 +37,10 @@ cashSessionsRouter
                     error: { message: `Missing '${key}' in request body` }
                 })
 
-        newEntry.cash_session_buyin = cash_session_buyin
-        newEntry.cash_session_cashout = cash_session_cashout
-        newEntry.cash_session_hours_played = cash_session_hours_played
-        newEntry.cash_session_date = cash_session_date
+        newEntry.buyin = buyin
+        newEntry.cashout = cashout
+        newEntry.hours_played = hours_played
+        newEntry.date = date
         newEntry.user_id = user_id
 
         CashSessionsService.insertCashSession(

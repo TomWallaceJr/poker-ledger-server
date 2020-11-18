@@ -1,5 +1,5 @@
 TRUNCATE users RESTART IDENTITY cascade;
-INSERT INTO users (user_id, user_username, user_password, user_email)
+INSERT INTO users (user_id, username, password, email)
 VALUES
     (1, 'pokerbuddy', 'supersecurepassword', 'pokerkid1@gmail.com'),
     (2, 'thePokerGOAT', 'passwordf', 'mynameboo@gmail.com'),
