@@ -8,8 +8,7 @@ const jwt = require('jsonwebtoken');
 
 const usersRouter = require('./users/users_router')
 const cashSessionsRouter = require('./cash_sessions/cash_sessions_router')
-
-
+const loginRouter = require('./users/login_router')
 
 const app = express();
 
@@ -24,6 +23,7 @@ app.use(cors());
 // Endpoints moved to routers
 app.use('/api/users', usersRouter)
 app.use('/api/cash_sessions', cashSessionsRouter)
+app.use('/api/login', loginRouter)
 
 // app.get('/', (req, res) => {
 //     res.send('Hello, boilerplate!');

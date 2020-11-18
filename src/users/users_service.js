@@ -41,7 +41,6 @@ const UsersService = {
             .select('*')
             .from('users')
             .where('username', username)
-            .where('password', password)
     }
 }
 

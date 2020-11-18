@@ -124,7 +124,7 @@ usersRouter
             .catch(next)
     })
 
-usersRouter
+
 
 
 
