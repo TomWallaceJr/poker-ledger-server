@@ -27,6 +27,7 @@ usersRouter
             })
             .catch(next)
     })
+    // post route for creating new user account
     .post(jsonParser, (req, res, next) => {
         const { username, password, repeatPassword, email } = req.body
         const newUser = { username, password, email }
@@ -122,6 +123,8 @@ usersRouter
             })
             .catch(next)
     })
+
+usersRouter
 
 
 
