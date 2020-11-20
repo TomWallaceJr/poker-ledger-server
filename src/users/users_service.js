@@ -38,7 +38,7 @@ const UsersService = {
 
     userLogin(knex, username, password) {
         return knex
-            .select('username', 'password')
+            .select('username', 'password', 'user_id')
             .from('users')
             .where('username', username)
             .where('password', password)

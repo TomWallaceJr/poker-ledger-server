@@ -58,7 +58,6 @@ usersRouter
             .then(user => {
                 res
                     .status(201)
-                    // not clear on path.posix copied from previous code
                     .location(path.posix.join(req.originalUrl, `/${user.user_id}`))
                     .json(serializeUser(user))
             })
