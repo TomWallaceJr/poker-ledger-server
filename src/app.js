@@ -15,7 +15,7 @@ const morganOption = (NODE_ENV === 'production')
     ? 'tiny'
     : 'common';
 
-// I kept getting OPYION requests with my POST login request?
+// I kept getting OPTION requests with my POST login request?
 // This somehow fixes that problem according to stack overflow
 const corsOptions = {
     origin: true,
