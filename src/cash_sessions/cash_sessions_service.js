@@ -22,6 +22,7 @@ const CashSessionsService = {
             .from('cash_sessions')
             .select('*')
             .where('user_id', user_id)
+            .orderBy('date')
     },
 
     deleteCashSession(knex, id) {
